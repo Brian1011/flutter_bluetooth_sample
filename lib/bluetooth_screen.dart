@@ -10,6 +10,13 @@ class BlueToothScreen extends StatefulWidget {
 class _BlueToothScreenState extends State<BlueToothScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Bluetooth detector"),
+      ),
+      body: Container(
+        child: const Text("Bluetooth"),
+      ),
+    );
   }
 }
