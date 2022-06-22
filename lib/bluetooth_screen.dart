@@ -31,7 +31,6 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
 
     // Listen to scan results
     var subscription = flutterBlue.scanResults.listen((results) {
-
       // add device to list of devices
       for (ScanResult scanResult in results) {
         bluetoothDevices.add(scanResult.device);
@@ -50,22 +49,28 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextButton(
-              onPressed: scanDevice,
-              style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(const Size(150, 50)),
-                  backgroundColor: MaterialStateProperty.all(Colors.blue)),
-              child: const Text(
-                "Detect devices",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ],
-        ),
+        child: StreamBuilder<Object>(
+            stream: flutterBlue.state,
+            builder: (context, snapshot) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: scanDevice,
+                    style: ButtonStyle(
+                        minimumSize:
+                            MaterialStateProperty.all(const Size(150, 50)),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.blue)),
+                    child: const Text(
+                      "Detect devices",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              );
+            }),
       ),
     );
   }
