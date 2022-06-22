@@ -19,6 +19,8 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
         width: double.infinity,
         height: double.infinity,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TextButton(
               onPressed: () {},
