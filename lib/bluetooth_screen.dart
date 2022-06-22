@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 
 class BlueToothScreen extends StatefulWidget {
   const BlueToothScreen({Key? key}) : super(key: key);
@@ -9,6 +10,11 @@ class BlueToothScreen extends StatefulWidget {
 }
 
 class _BlueToothScreenState extends State<BlueToothScreen> {
+  // create flutter blue instance
+  FlutterBlue flutterBlue = FlutterBlue.instance;
+
+  // scanDevices
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +38,6 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
-            const Text("Bluetooth"),
           ],
         ),
       ),
