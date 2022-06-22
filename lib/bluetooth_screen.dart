@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 
@@ -27,6 +26,7 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
 
   scanDevice() {
     isScanning = true;
+    bluetoothDevices = [];
     flutterBlue.startScan(timeout: const Duration(seconds: 4));
 
     // Listen to scan results
@@ -47,31 +47,32 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
         title: const Text("Bluetooth detector"),
       ),
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: StreamBuilder<Object>(
-            stream: flutterBlue.state,
-            builder: (context, snapshot) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: scanDevice,
-                    style: ButtonStyle(
-                        minimumSize:
-                            MaterialStateProperty.all(const Size(150, 50)),
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.blue)),
-                    child: const Text(
-                      "Detect devices",
-                      style: TextStyle(color: Colors.white),
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: _isScanning
+                ? [
+                    const CircularProgressIndicator(
+                      color: Colors.blue,
+                    )
+                  ]
+                : [
+                    TextButton(
+                      onPressed: scanDevice,
+                      style: ButtonStyle(
+                          minimumSize:
+                              MaterialStateProperty.all(const Size(150, 50)),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue)),
+                      child: const Text(
+                        "Detect devices",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
-                  ),
-                ],
-              );
-            }),
-      ),
+                  ],
+          )),
     );
   }
 }
