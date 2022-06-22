@@ -14,6 +14,17 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
   FlutterBlue flutterBlue = FlutterBlue.instance;
 
   // scanDevices
+  scanDevice() {
+    flutterBlue.startScan(timeout: const Duration(seconds: 4));
+
+    // Listen to scan results
+    var subscription = flutterBlue.scanResults.listen((results) {
+      // do something with scan results
+      for (ScanResult r in results) {
+        print('${r.device.name} found! rssi: ${r.rssi}');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +40,7 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TextButton(
-              onPressed: () {},
+              onPressed: scanDevice,
               style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(const Size(150, 50)),
                   backgroundColor: MaterialStateProperty.all(Colors.blue)),
