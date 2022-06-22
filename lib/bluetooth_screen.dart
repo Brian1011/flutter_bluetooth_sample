@@ -13,17 +13,32 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
   // create flutter blue instance
   FlutterBlue flutterBlue = FlutterBlue.instance;
 
-  // scanDevices
+  // list of scanned devices
+  List<BluetoothDevice> bluetoothDevices = [];
+
+  bool _isScanning = false;
+
+  bool get isScanning => _isScanning;
+
+  set isScanning(bool value) {
+    _isScanning = value;
+    setState(() {});
+  } // scanDevices
+
   scanDevice() {
+    isScanning = true;
     flutterBlue.startScan(timeout: const Duration(seconds: 4));
 
     // Listen to scan results
     var subscription = flutterBlue.scanResults.listen((results) {
-      // do something with scan results
-      for (ScanResult r in results) {
-        print('${r.device.name} found! rssi: ${r.rssi}');
+
+      // add device to list of devices
+      for (ScanResult scanResult in results) {
+        bluetoothDevices.add(scanResult.device);
       }
     });
+
+    isScanning = false;
   }
 
   @override
