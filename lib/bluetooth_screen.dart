@@ -54,6 +54,7 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: _isScanning
                 ? [
+                    // loading spinner
                     const CircularProgressIndicator(
                       color: Colors.blue,
                     )
