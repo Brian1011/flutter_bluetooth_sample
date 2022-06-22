@@ -59,18 +59,35 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
                     )
                   ]
                 : [
-                    TextButton(
-                      onPressed: scanDevice,
-                      style: ButtonStyle(
-                          minimumSize:
-                              MaterialStateProperty.all(const Size(150, 50)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.blue)),
-                      child: const Text(
-                        "Detect devices",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+                    bluetoothDevices.isNotEmpty
+                        ? Expanded(
+                            child: ListView(
+                              children: [
+                                ...bluetoothDevices
+                                    .map((bluetoothDevice) => Card(
+                                          child: ListTile(
+                                            title: Text(bluetoothDevice
+                                                    .name.isEmpty
+                                                ? "No device name - ${bluetoothDevice.id}"
+                                                : bluetoothDevice.name),
+                                          ),
+                                        ))
+                                    .toList(),
+                              ],
+                            ),
+                          )
+                        : TextButton(
+                            onPressed: scanDevice,
+                            style: ButtonStyle(
+                                minimumSize: MaterialStateProperty.all(
+                                    const Size(150, 50)),
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.blue)),
+                            child: const Text(
+                              "Detect devices",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          )
                   ],
           )),
     );
