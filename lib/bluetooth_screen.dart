@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BlueToothScreen extends StatefulWidget {
@@ -15,7 +16,23 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
         title: const Text("Bluetooth detector"),
       ),
       body: Container(
-        child: const Text("Bluetooth"),
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          children: [
+            TextButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                  minimumSize: MaterialStateProperty.all(const Size(150, 50)),
+                  backgroundColor: MaterialStateProperty.all(Colors.blue)),
+              child: const Text(
+                "Detect devices",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            const Text("Bluetooth"),
+          ],
+        ),
       ),
     );
   }
