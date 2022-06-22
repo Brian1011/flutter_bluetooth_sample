@@ -24,10 +24,10 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
     setState(() {});
   } // scanDevices
 
-  scanDevice() {
+  scanDevice() async {
     isScanning = true;
     bluetoothDevices = [];
-    flutterBlue.startScan(timeout: const Duration(seconds: 4));
+    await flutterBlue.startScan(timeout: const Duration(seconds: 4));
 
     // Listen to scan results
     var subscription = flutterBlue.scanResults.listen((results) {
