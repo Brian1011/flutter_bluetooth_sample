@@ -13,7 +13,7 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
   FlutterBlue flutterBlue = FlutterBlue.instance;
 
   // list of scanned devices
-  List<BluetoothDevice> bluetoothDevices = [];
+  List<BluetoothDevice> discoveredBluetoothDevices = [];
 
   bool _isScanning = false;
 
@@ -26,14 +26,14 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
 
   scanDevice() async {
     isScanning = true;
-    bluetoothDevices = [];
+    discoveredBluetoothDevices = [];
     await flutterBlue.startScan(timeout: const Duration(seconds: 4));
 
     // Listen to scan results
     var subscription = flutterBlue.scanResults.listen((results) {
       // add device to list of devices
       for (ScanResult scanResult in results) {
-        bluetoothDevices.add(scanResult.device);
+        discoveredBluetoothDevices.add(scanResult.device);
       }
     });
 
@@ -61,11 +61,11 @@ class _BlueToothScreenState extends State<BlueToothScreen> {
                   ]
                 : [
                     // discovered devices
-                    bluetoothDevices.isNotEmpty
+                    discoveredBluetoothDevices.isNotEmpty
                         ? Expanded(
                             child: ListView(
                               children: [
-                                ...bluetoothDevices
+                                ...discoveredBluetoothDevices
                                     .map((bluetoothDevice) => Card(
                                           child: ListTile(
                                             title: Text(bluetoothDevice
