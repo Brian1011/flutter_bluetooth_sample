@@ -10,3 +10,5 @@ flutter version: 2.10.4
 
 ## Screenshots
 
+## Developer contact
+In case of any queries reach me on [Twitter](https://twitter.com/brian_1011_dev)
